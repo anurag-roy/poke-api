@@ -1,0 +1,10 @@
+{
+  "deno.enable": true,
+  "deno.lint": true,
+  "deno.unstable": false,
+  "deno.config": "./deno.jsonc",
+  "deno.suggest.autoImports": true,
+  "deno.suggest.imports.hosts": {
+    "https://deno.land": true
+  }
+}

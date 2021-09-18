@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "types": [
+      // Types for Deno Deploy
+      "https://deno.land/x/deploy@0.3.0/types/deploy.ns.d.ts",
+      "https://deno.land/x/deploy@0.3.0/types/deploy.window.d.ts",
+      "https://deno.land/x/deploy@0.3.0/types/deploy.fetchevent.d.ts"
+    ]
+  },
+  "fmt": {
+    "options": {
+      "singleQuote": true,
+      "useTabs": false,
+      "indentWidth": 2,
+      "lineWidth": 100
+    }
+  }
+}

@@ -6,13 +6,13 @@ const app = new Application();
 const router = new Router();
 
 router
-    .get('/', async (context) => {
+    .get('/api/pokemon', async (context) => {
         const pokemon: PokemonBase[] = JSON.parse(
             await Deno.readTextFile('assets/data/index.json')
         );
         context.response.body = pokemon;
     })
-    .get('/:id', async (context) => {
+    .get('/api/pokemon/:id', async (context) => {
         const id = context.params.id;
         try {
             const pokemon: Pokemon[] = JSON.parse(

@@ -12,17 +12,17 @@ A dead simple Pokédex API. The data was prepared from [PokéAPI's api-data](htt
 #### Get all Pokémon
 
 ```http
-  GET /api/pokemon
+  GET /pokemon
 ```
 
-| Parameter | Type     | Default | Description                                                      |
-| :-------- | :------- | :------ | :--------------------------------------------------------------- |
-| `limit`   | `number` | 0       | Number of objects to return. A value of `0` returns all pokemon. |
-| `offset`  | `number` | 1       | Id from which to start the list                                  |
+| Parameter | Type     | Default | Description                     |
+| :-------- | :------- | :------ | :------------------------------ |
+| `limit`   | `number` | 1000    | Number of objects to return.    |
+| `offset`  | `number` | 1       | Id from which to start the list |
 
 ##### Examples
 
-Endpoint: `/api/pokemon?offset=150&limit=2`
+Endpoint: `/pokemon?offset=150&limit=2`
 
 <details>
   <summary>Response body</summary>
@@ -54,7 +54,7 @@ Endpoint: `/api/pokemon?offset=150&limit=2`
 #### Get Pokémon by National Pokédex Index
 
 ```http
-  GET /api/pokemon/${id}
+  GET /pokemon/${id}
 ```
 
 | Parameter | Type     | Description            |
@@ -63,7 +63,7 @@ Endpoint: `/api/pokemon?offset=150&limit=2`
 
 ##### Examples
 
-Endpoint: `/api/pokemon/150`
+Endpoint: `/pokemon/150`
 
 <details>
   <summary>Response body</summary>
@@ -109,7 +109,7 @@ Endpoint: `/api/pokemon/150`
 
 ## Additional Resources
 
-- [PokéAPI pokémon data including sprites and official artwork](https://github.com/PokeAPI/api-data)
-- [Gist to create custom pokémon data](https://gist.github.com/anurag-roy/6b39fff1cfe89fcf7132e95b6ac66de1)
-- [Gist to convert images to .webp](https://gist.github.com/anurag-roy/86f312125bf76f0b93c10492c162b26f)
-- [Deno Deploy Docs](https://deno.com/deploy/docs/)
+-   [PokéAPI pokémon data including sprites and official artwork](https://github.com/PokeAPI/api-data)
+-   [Gist to create custom pokémon data](https://gist.github.com/anurag-roy/6b39fff1cfe89fcf7132e95b6ac66de1)
+-   [Gist to convert images to .webp](https://gist.github.com/anurag-roy/86f312125bf76f0b93c10492c162b26f)
+-   [Deno Deploy Docs](https://deno.com/deploy/docs/)

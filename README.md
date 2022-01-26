@@ -12,12 +12,12 @@ A dead simple Pokédex API. The data was prepared from [PokéAPI's api-data](htt
 #### Get all Pokémon
 
 ```http
-  GET /pokemon
+GET /pokemon
 ```
 
 | Parameter | Type     | Default | Description                     |
 | :-------- | :------- | :------ | :------------------------------ |
-| `limit`   | `number` | 1000    | Number of objects to return.    |
+| `limit`   | `number` | 150     | Number of objects to return.    |
 | `offset`  | `number` | 1       | Id from which to start the list |
 
 ##### Examples
@@ -56,7 +56,7 @@ Endpoint: `/pokemon?offset=150&limit=2`
 #### Get Pokémon by National Pokédex Index
 
 ```http
-  GET /pokemon/${id}
+GET /pokemon/${id}
 ```
 
 | Parameter | Type     | Description            |

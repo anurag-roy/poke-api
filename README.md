@@ -36,7 +36,8 @@ Endpoint: `/pokemon?offset=150&limit=2`
     "imageUrl": "https://raw.githubusercontent.com/anurag-roy/poke-api/main/assets/images/150.webp",
     "types": [
       "Psychic"
-    ]
+    ],
+    "color":"#ded9e3"
   },
   {
     "id": 151,
@@ -46,7 +47,8 @@ Endpoint: `/pokemon?offset=150&limit=2`
     "imageUrl": "https://raw.githubusercontent.com/anurag-roy/poke-api/main/assets/images/151.webp",
     "types": [
       "Psychic"
-    ]
+    ],
+    "color":"#eec3cd"
   }
   ```
 </details>
@@ -100,7 +102,8 @@ Endpoint: `/pokemon/150`
     },
     "locations": [
       "Cerulean Cave"
-    ]
+    ],
+    "color":"#ded9e3"
   }
   ```
 </details>
@@ -112,4 +115,5 @@ Endpoint: `/pokemon/150`
 -   [PokéAPI pokémon data including sprites and official artwork](https://github.com/PokeAPI/api-data)
 -   [Gist to create custom pokémon data](https://gist.github.com/anurag-roy/6b39fff1cfe89fcf7132e95b6ac66de1)
 -   [Gist to convert images to .webp](https://gist.github.com/anurag-roy/86f312125bf76f0b93c10492c162b26f)
+-   [Extract dominant color from images](https://github.com/anurag-roy/get-dominant-color)
 -   [Deno Deploy Docs](https://deno.com/deploy/docs/)

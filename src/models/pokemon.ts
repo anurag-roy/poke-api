@@ -5,6 +5,10 @@ export interface PokemonBase {
     description: string;
     types: string[];
     imageUrl: string;
+    /**
+     * Hex code for the most dominant color in the image.
+     */
+    color: string;
 }
 
 export interface Pokemon extends PokemonBase {

@@ -5,6 +5,18 @@ import PokemonRouter from './routes/pokemon.route.ts';
 const app = new Application();
 
 app.use(oakCors());
+
+app.use(async (context, next) => {
+  try {
+    await context.send({
+      root: `${Deno.cwd()}/_site`,
+      index: 'index.html',
+    });
+  } catch {
+    next();
+  }
+});
+
 app.use(PokemonRouter.routes(), PokemonRouter.allowedMethods());
 
 app.listen({ port: 80 });

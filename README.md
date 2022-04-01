@@ -1,9 +1,16 @@
-A dead simple Pokédex API. The data was prepared from [PokéAPI's api-data](https://github.com/PokeAPI/api-data) using this simple [script](https://gist.github.com/anurag-roy/6b39fff1cfe89fcf7132e95b6ac66de1). Also all the images are in `.webp` to speed things up a bit.
+---
+layout: layout.tsx
+title: 'Poké API'
+url: ./index.html
+---
 
-## Why
+<div align="center">
 
-1. This started out as an API to just test out [Deno Deploy](https://deno.com/deploy/).
-2. Now, it's just my defacto API when trying out some new frontend tool/framework.
+<img src="/assets/logo/logo.webp" width="140" />
+
+A dead simple Pokédex API.
+
+</div>
 
 ---
 
@@ -110,6 +117,13 @@ Endpoint: `/pokemon/150`
 
 ---
 
+## Why
+
+1. This started out as an API to just test out [Deno Deploy](https://deno.com/deploy/).
+2. Now, it's just my defacto API when trying out some new frontend tool/framework.
+
+The data was prepared from [PokéAPI's api-data](https://github.com/PokeAPI/api-data) using this simple [script](https://gist.github.com/anurag-roy/6b39fff1cfe89fcf7132e95b6ac66de1). Also all the images are in `.webp` to speed things up a bit.
+
 ## Additional Resources
 
 - [PokéAPI pokémon data including sprites and official artwork](https://github.com/PokeAPI/api-data)
@@ -117,3 +131,7 @@ Endpoint: `/pokemon/150`
 - [Gist to convert images to .webp](https://gist.github.com/anurag-roy/86f312125bf76f0b93c10492c162b26f)
 - [Extract dominant color from images](https://github.com/anurag-roy/get-dominant-color)
 - [Deno Deploy Docs](https://deno.com/deploy/docs/)
+
+## Credits
+
+- Icon from [Flaticon](https://www.flaticon.com/free-icon/pokecoin_188926)

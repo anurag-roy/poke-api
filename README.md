@@ -1,9 +1,3 @@
----
-layout: layout.tsx
-title: 'Poké API'
-url: ./index.html
----
-
 <div align="center">
 
 <img src="/assets/logo/logo.webp" width="140" />

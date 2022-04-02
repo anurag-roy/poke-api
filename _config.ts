@@ -16,6 +16,8 @@ const site = lume(
   },
 );
 
+site.ignore('README.md');
+
 site
   .copy('/assets/css/style.css')
   .copy('/assets/css/hljs.css')
@@ -23,5 +25,23 @@ site
   .copy('/assets/logo/logo.webp');
 
 site.use(codeHighlight()).use(jsx());
+
+// Seed README with metadata and create a temporary index.README
+site.addEventListener('beforeBuild', async () => {
+  const readMeFrontMatter = [
+    '---',
+    'layout: layout.tsx',
+    'title: "Poké API"',
+    '---',
+  ];
+
+  const readMe = await Deno.readTextFile('./README.md');
+  const newReadMe = readMeFrontMatter.join('\n') + '\n' + readMe;
+  await Deno.writeTextFile('./index.md', newReadMe);
+});
+
+site.addEventListener('afterBuild', async () => {
+  await Deno.remove('./index.md');
+});
 
 export default site;

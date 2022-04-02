@@ -13,7 +13,7 @@ const site = lume(
         typographer: true,
       },
     },
-  }
+  },
 );
 
 site

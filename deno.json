@@ -1,11 +1,11 @@
 {
   "tasks": {
+    "dev": "deno run --allow-net --allow-read --watch src/index.ts",
     "build": "deno run -A https://deno.land/x/lume@v1.7.2/ci.ts",
     "serve": "deno task build -- -s"
   },
   "compilerOptions": {
-    "jsx": "react",
-    "jsxImportSource": "react-jsx"
+    "jsx": "react"
   },
   "fmt": {
     "options": {

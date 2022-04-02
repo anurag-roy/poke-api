@@ -13,10 +13,10 @@ app.use(async (context, next) => {
       index: 'index.html',
     });
   } catch {
-    next();
+    await next();
   }
 });
 
 app.use(PokemonRouter.routes(), PokemonRouter.allowedMethods());
 
-app.listen({ port: 80 });
+app.listen({ port: 8000 });

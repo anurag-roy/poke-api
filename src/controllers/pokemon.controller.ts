@@ -1,4 +1,5 @@
 import { RouterMiddleware } from 'https://deno.land/x/oak@v9.0.1/mod.ts';
+import seedrandom from 'https://esm.sh/v86/seedrandom@3.0.5/es2022/seedrandom.min.js';
 import { Pokemon, PokemonBase } from '../models/pokemon.ts';
 
 export const getPokemon: RouterMiddleware = async (context) => {
@@ -22,4 +23,18 @@ export const getPokemonDetail: RouterMiddleware<{ id: string }> = async (context
         console.log(error);
         context.throw(404, 'Pokemon not found!');
     }
+};
+
+export const getPokemonOfTheDay: RouterMiddleware = async (context) => {
+    const MAX_POKEMON_POOL = 898;
+    const DEFAULT_POKEMON_POOL = MAX_POKEMON_POOL;
+    const params = context.request.url.searchParams;
+    const pool = Math.min(Number((params.get('pool')) || DEFAULT_POKEMON_POOL), MAX_POKEMON_POOL);
+
+    const todaysDate = new Date().toDateString();
+    const rng = new seedrandom(todaysDate);
+    const pokemonId = Math.round(rng() * pool);
+
+    const pokemon: Pokemon[] = JSON.parse(await Deno.readTextFile(`assets/data/${pokemonId}.json`));
+    context.response.body = pokemon;
 };

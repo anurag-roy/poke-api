@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="/assets/logo/logo.webp" width="140" />
+<img src="/assets/logo/logo.webp" width="140" title="Pokédex API Logo" />
 
 A dead simple Pokédex API.
 
@@ -54,6 +54,8 @@ Endpoint: `/pokemon?offset=150&limit=2`
   ```
 </details>
 
+---
+
 #### Get Pokémon by National Pokédex Index
 
 ```http
@@ -70,6 +72,63 @@ Endpoint: `/pokemon/150`
 
 <details>
   <summary>Response body</summary>
+  
+  ```json
+  {
+    "id": 150,
+    "name": "Mewtwo",
+    "genus": "Genetic Pokémon",
+    "description": "It was created by a scientist after years of horrific gene splicing and DNA engineering experiments.",
+    "imageUrl": "https://raw.githubusercontent.com/anurag-roy/poke-api/main/assets/images/150.webp",
+    "types": [
+      "Psychic"
+    ],
+    "abilities": [
+      {
+        "name": "Pressure",
+        "effect": "Moves targetting this Pokémon use one extra PP.  This ability stacks if multiple targets have it.  This ability still affects moves that fail or miss.  This ability does not affect ally moves that target either the entire field or just its side, nor this Pokémon's self-targetted moves; it does, however, affect single-targetted ally moves aimed at this Pokémon, ally moves that target all other Pokémon, and opponents' moves that target the entire field.  If this ability raises a move's PP cost above its remaining PP, it will use all remaining PP.  When this Pokémon enters battle, all participating trainers are notified that it has this ability.  Overworld: If the lead Pokémon has this ability, higher-levelled Pokémon have their encounter rate increased.",
+        "description": "Raises foe's PP usage."
+      },
+      {
+        "name": "Unnerve",
+        "effect": "Opposing Pokémon cannot eat held Berries while this Pokémon is in battle.  Affected Pokémon can still use bug bite or pluck to eat a target's Berry.",
+        "description": "Makes the foe nervous and unable to eat Berries."
+      }
+    ],
+    "stats": {
+      "HP": 106,
+      "Attack": 110,
+      "Defense": 90,
+      "Special Attack": 154,
+      "Special Defense": 90,
+      "Speed": 130
+    },
+    "locations": [
+      "Cerulean Cave"
+    ],
+    "color":"#ded9e3"
+  }
+  ```
+</details>
+
+---
+
+#### Get Pokémon of the Day
+
+```http
+GET /pokemon/potd
+```
+
+| Parameter | Type     | Default | Description                                                                           |
+| :-------- | :------- | :------ | :------------------------------------------------------------------------------------ |
+| `pool`    | `number` | 898     | Id upto which the Pokémon will be pooled from. e.g. Give 151 to only pool from Gen 1. |
+
+##### Examples
+
+Endpoint: `/pokemon/potd?pool=151`
+
+<details>
+  <summary>Sample Response body</summary>
   
   ```json
   {

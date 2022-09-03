@@ -2,7 +2,7 @@
   "tasks": {
     "dev": "deno run --allow-net --allow-read --watch src/index.ts",
     "build": "deno run -A https://deno.land/x/lume@v1.7.2/ci.ts",
-    "serve": "deno task build -- -s"
+    "serve": "deno task build -s"
   },
   "compilerOptions": {
     "jsx": "react"
@@ -11,7 +11,7 @@
     "options": {
       "singleQuote": true,
       "useTabs": false,
-      "indentWidth": 2,
+      "indentWidth": 4,
       "lineWidth": 100
     }
   }

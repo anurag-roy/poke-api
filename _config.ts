@@ -1,5 +1,4 @@
 import lume from 'https://deno.land/x/lume@v1.7.2/mod.ts';
-import codeHighlight from 'https://deno.land/x/lume@v1.7.2/plugins/code_highlight.ts';
 import jsx from 'https://deno.land/x/lume@v1.7.2/plugins/jsx.ts';
 
 const site = lume(
@@ -16,7 +15,12 @@ const site = lume(
   },
 );
 
-site.ignore('README.md');
+site.preprocess(['.md'], (page) => {
+  page.data.layout = 'layout.tsx';
+  page.data.title = 'Poké API';
+  page.dest.path = 'index';
+  page.dest.ext = '.html';
+});
 
 site
   .copy('/assets/css/style.css')
@@ -24,24 +28,6 @@ site
   .copy('/assets/logo/favicon.ico')
   .copy('/assets/logo/logo.webp');
 
-site.use(codeHighlight()).use(jsx());
-
-// Seed README with metadata and create a temporary index.README
-site.addEventListener('beforeBuild', async () => {
-  const readMeFrontMatter = [
-    '---',
-    'layout: layout.tsx',
-    'title: "Poké API"',
-    '---',
-  ];
-
-  const readMe = await Deno.readTextFile('./README.md');
-  const newReadMe = readMeFrontMatter.join('\n') + '\n' + readMe;
-  await Deno.writeTextFile('./index.md', newReadMe);
-});
-
-site.addEventListener('afterBuild', async () => {
-  await Deno.remove('./index.md');
-});
+site.use(jsx());
 
 export default site;

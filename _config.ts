@@ -1,4 +1,5 @@
 import lume from 'https://deno.land/x/lume@v1.7.2/mod.ts';
+import codeHighlight from 'https://deno.land/x/lume@v1.7.2/plugins/code_highlight.ts';
 import jsx from 'https://deno.land/x/lume@v1.7.2/plugins/jsx.ts';
 
 const site = lume(
@@ -28,6 +29,6 @@ site
   .copy('/assets/logo/favicon.ico')
   .copy('/assets/logo/logo.webp');
 
-site.use(jsx());
+site.use(codeHighlight()).use(jsx());
 
 export default site;

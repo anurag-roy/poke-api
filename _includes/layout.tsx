@@ -1,14 +1,34 @@
 interface LayoutProps {
   title: string;
+  description: string;
   children: React.ReactChildren;
 }
 
-export default ({ title, children }: LayoutProps) => (
+export default ({ title, description, children }: LayoutProps) => (
   <html>
     <head>
-      <meta charset="utf-8" />
+      <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+      <meta name="description" content={description} />
+      <meta property="og:locale" content="en_US" />
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" content="https://pokepi.deno.dev/" />
+      <meta property="og:site_name" content="Poké API" />
+      <meta
+        property="og:image"
+        content="https://repository-images.githubusercontent.com/407828918/c9f248cb-02f5-4d1e-93f6-7ce002be6c8a"
+      />
+      <meta property="og:image:width" content="1280" />
+      <meta property="og:image:height" content="640" />
+      <meta property="og:image:type" content="image/png" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@anurag__roy" />
+
       <title>{title}</title>
+      <link rel="dns-prefetch" href="https://fonts.googleapis.com/" />
       <link rel="stylesheet" href="assets/css/style.css" />
       <link rel="stylesheet" href="assets/css/hljs.css" />
       <link rel="icon" href="assets/logo/favicon.ico" />

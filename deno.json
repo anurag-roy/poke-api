@@ -5,7 +5,8 @@
     "serve": "deno task build -s"
   },
   "compilerOptions": {
-    "jsx": "react"
+    "jsx": "react-jsx",
+    "jsxImportSource": "https://esm.sh/react@18.0.0"
   },
   "fmt": {
     "options": {

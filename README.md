@@ -121,7 +121,7 @@ GET /pokemon/potd
 
 | Parameter | Type     | Default | Description                                                                           |
 | :-------- | :------- | :------ | :------------------------------------------------------------------------------------ |
-| `pool`    | `number` | 898     | Id upto which the Pokémon will be pooled from. e.g. Give 151 to only pool from Gen 1. |
+| `pool`    | `number` | 905     | Id upto which the Pokémon will be pooled from. e.g. Give 151 to only pool from Gen 1. |
 
 ##### Examples
 

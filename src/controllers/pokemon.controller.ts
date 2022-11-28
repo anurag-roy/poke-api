@@ -26,7 +26,7 @@ export const getPokemonDetail: RouterMiddleware<{ id: string }> = async (context
 };
 
 export const getPokemonOfTheDay: RouterMiddleware = async (context) => {
-    const MAX_POKEMON_POOL = 898;
+    const MAX_POKEMON_POOL = 905;
     const DEFAULT_POKEMON_POOL = MAX_POKEMON_POOL;
     const params = context.request.url.searchParams;
     const pool = Math.min(Number((params.get('pool')) || DEFAULT_POKEMON_POOL), MAX_POKEMON_POOL);

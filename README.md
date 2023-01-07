@@ -34,7 +34,7 @@ Endpoint: `/pokemon?offset=150&limit=2`
     "name": "Mewtwo",
     "genus": "Genetic Pokémon",
     "description": "It was created by a scientist after years of horrific gene splicing and DNA engineering experiments.",
-    "imageUrl": "https://raw.githubusercontent.com/anurag-roy/poke-api/main/assets/images/150.webp",
+    "imageUrl": "https://pub-460ada4f152c4135a7ec0881a2cb1330.r2.dev/150.webp",
     "types": [
       "Psychic"
     ],
@@ -45,7 +45,7 @@ Endpoint: `/pokemon?offset=150&limit=2`
     "name": "Mew",
     "genus": "New Species Pokémon",
     "description": "So rare that it is still said to be a mirage by many experts. Only a few people have seen it worldwide.",
-    "imageUrl": "https://raw.githubusercontent.com/anurag-roy/poke-api/main/assets/images/151.webp",
+    "imageUrl": "https://pub-460ada4f152c4135a7ec0881a2cb1330.r2.dev/151.webp",
     "types": [
       "Psychic"
     ],
@@ -79,7 +79,7 @@ Endpoint: `/pokemon/150`
     "name": "Mewtwo",
     "genus": "Genetic Pokémon",
     "description": "It was created by a scientist after years of horrific gene splicing and DNA engineering experiments.",
-    "imageUrl": "https://raw.githubusercontent.com/anurag-roy/poke-api/main/assets/images/150.webp",
+    "imageUrl": "https://pub-460ada4f152c4135a7ec0881a2cb1330.r2.dev/150.webp",
     "types": [
       "Psychic"
     ],
@@ -136,7 +136,7 @@ Endpoint: `/pokemon/potd?pool=151`
     "name": "Mewtwo",
     "genus": "Genetic Pokémon",
     "description": "It was created by a scientist after years of horrific gene splicing and DNA engineering experiments.",
-    "imageUrl": "https://raw.githubusercontent.com/anurag-roy/poke-api/main/assets/images/150.webp",
+    "imageUrl": "https://pub-460ada4f152c4135a7ec0881a2cb1330.r2.dev/150.webp",
     "types": [
       "Psychic"
     ],

@@ -28,8 +28,11 @@ export const getPokemonDetail: RouterMiddleware<{ id: string }> = async (context
 export const getPokemonOfTheDay: RouterMiddleware = async (context) => {
     const MAX_POKEMON_POOL = 905;
     const DEFAULT_POKEMON_POOL = MAX_POKEMON_POOL;
-    const params = context.request.url.searchParams;
-    const pool = Math.min(Number((params.get('pool')) || DEFAULT_POKEMON_POOL), MAX_POKEMON_POOL);
+    const poolInParams = context.request.url.searchParams.get('pool');
+    const pool = Math.min(
+      Number(poolInParams) || DEFAULT_POKEMON_POOL,
+      MAX_POKEMON_POOL
+    );
 
     const todaysDate = new Date().toDateString();
     const rng = new seedrandom(todaysDate);

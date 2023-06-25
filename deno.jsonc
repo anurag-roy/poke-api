@@ -1,0 +1,25 @@
+{
+  "imports": {
+    "lume/": "https://deno.land/x/lume@v1.17.5/",
+    "oak/": "https://deno.land/x/oak@v12.5.0/"
+  },
+  "tasks": {
+    // TODO: Remove `--unstable` once KV becomes stable
+    "dev": "deno run --unstable --allow-net --allow-read --watch src/index.ts",
+    "lume": "echo \"import 'lume/cli.ts'\" | deno run --unstable -A -",
+    "build": "deno task lume",
+    "serve": "deno task lume -s"
+  },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "https://esm.sh/react@18.0.0"
+  },
+  "fmt": {
+    "options": {
+      "singleQuote": true,
+      "useTabs": false,
+      "indentWidth": 2,
+      "lineWidth": 100
+    }
+  }
+}

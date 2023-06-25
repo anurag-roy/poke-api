@@ -1,19 +1,21 @@
-import { Router } from 'https://deno.land/x/oak@v9.0.1/mod.ts';
+import { Router } from 'oak/mod.ts';
 import {
-    getPokemon,
-    getPokemonDetail,
-    getPokemonOfTheDay,
+  getPokemon,
+  getPokemonDetail,
+  getPokemonOfTheDay,
+  migratePokemonToKv,
 } from '../controllers/pokemon.controller.ts';
 
 /**
- * Router for the routes starting with `api/pokemon/`
+ * Router for the routes starting with `pokemon/`
  */
 const router = new Router({
-    prefix: '/pokemon',
+  prefix: '/pokemon',
 });
 
 router.get('/', getPokemon);
 router.get('/potd', getPokemonOfTheDay);
-router.get('/:id', getPokemonDetail);
+router.post('/migrate', migratePokemonToKv);
+router.get('/:idOrName', getPokemonDetail);
 
 export default router;

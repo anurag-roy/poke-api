@@ -1,43 +1,104 @@
 import { RouterMiddleware } from 'https://deno.land/x/oak@v9.0.1/mod.ts';
-import seedrandom from 'https://esm.sh/v86/seedrandom@3.0.5/es2022/seedrandom.min.js';
-import { Pokemon, PokemonBase } from '../models/pokemon.ts';
+import { Pokemon } from '../models/pokemon.ts';
 
 export const getPokemon: RouterMiddleware = async (context) => {
-    const DEFAULT_OFFSET = 1;
-    const DEFAULT_LIMIT = 150;
+  const DEFAULT_OFFSET = 1;
+  const DEFAULT_LIMIT = 150;
 
-    const params = context.request.url.searchParams;
-    const offset = Number(params.get('offset')) || DEFAULT_OFFSET;
-    const limit = Number(params.get('limit')) || DEFAULT_LIMIT;
+  const params = context.request.url.searchParams;
+  const offset = Number(params.get('offset')) || DEFAULT_OFFSET;
+  const limit = Number(params.get('limit')) || DEFAULT_LIMIT;
 
-    const pokemon: PokemonBase[] = JSON.parse(await Deno.readTextFile('assets/data/index.json'));
-    context.response.body = pokemon.slice(offset - 1, offset - 1 + limit);
+  try {
+    const kv = await Deno.openKv();
+    const pokemonIterator = kv.list<Pokemon>({
+      start: ['pokemon', offset],
+      end: ['pokemon', offset + limit],
+    });
+
+    const pokemon: Pokemon[] = [];
+    for await (const p of pokemonIterator) pokemon.push(p.value);
+
+    context.response.body = pokemon;
+  } catch (error) {
+    console.log(error);
+    context.throw(500, 'Internal server error');
+  }
 };
 
-export const getPokemonDetail: RouterMiddleware<{ id: string }> = async (context) => {
-    const id = context.params.id;
-    try {
-        const pokemon: Pokemon[] = JSON.parse(await Deno.readTextFile(`assets/data/${id}.json`));
-        context.response.body = pokemon;
-    } catch (error) {
-        console.log(error);
-        context.throw(404, 'Pokemon not found!');
-    }
+export const getPokemonDetail: RouterMiddleware<{ idOrName: string }> = async (
+  context,
+) => {
+  const idOrName = Number.isNaN(Number(context.params.idOrName))
+    ? decodeURIComponent(context.params.idOrName).toLowerCase()
+    : Number(context.params.idOrName);
+  try {
+    const kv = await Deno.openKv();
+    const { value } = await kv.get<Pokemon>([
+      typeof idOrName === 'number' ? 'pokemon' : 'pokemon_by_name',
+      idOrName,
+    ]);
+    context.response.body = value;
+    kv.close();
+  } catch (error) {
+    console.log(error);
+    context.throw(500, 'Internal server error');
+  }
+
+  if (!context.response.body) {
+    context.throw(404, 'Pokemon not found!');
+  }
 };
 
 export const getPokemonOfTheDay: RouterMiddleware = async (context) => {
-    const MAX_POKEMON_POOL = 905;
-    const DEFAULT_POKEMON_POOL = MAX_POKEMON_POOL;
-    const poolInParams = context.request.url.searchParams.get('pool');
-    const pool = Math.min(
-      Number(poolInParams) || DEFAULT_POKEMON_POOL,
-      MAX_POKEMON_POOL
-    );
+  const pool = 905;
+  const todaysDate = new Date().toDateString();
 
-    const todaysDate = new Date().toDateString();
-    const rng = new seedrandom(todaysDate);
-    const pokemonId = Math.round(rng() * pool);
+  try {
+    const kv = await Deno.openKv();
+    const { value: existingPotd } = await kv.get<Pokemon>(['potd', todaysDate]);
+    if (existingPotd) {
+      context.response.body = existingPotd;
+      kv.close();
+    } else {
+      const randomNumber = Math.ceil(Math.random() * pool);
+      const { value: pokemonData } = await kv.get<Pokemon>([
+        'pokemon',
+        randomNumber,
+      ]);
+      await kv.set(['potd', todaysDate], pokemonData);
+      context.response.body = pokemonData;
+      kv.close();
+    }
+  } catch (error) {
+    console.log(error);
+    context.throw(500, 'Internal server error');
+  }
+};
 
-    const pokemon: Pokemon[] = JSON.parse(await Deno.readTextFile(`assets/data/${pokemonId}.json`));
-    context.response.body = pokemon;
+export const migratePokemonToKv: RouterMiddleware = async (context) => {
+  const body = context.request.body({ type: 'json' });
+  const { id } = await body.value;
+
+  const p: Pokemon = JSON.parse(
+    await Deno.readTextFile(`assets/data/${id}.json`),
+  );
+
+  const primaryKey = ['pokemon', p.id];
+  const byName = ['pokemon_by_name', p.name.toLowerCase()];
+
+  const kv = await Deno.openKv();
+  const res = await kv
+    .atomic()
+    .check({ key: primaryKey, versionstamp: null })
+    .check({ key: byName, versionstamp: null })
+    .set(primaryKey, p)
+    .set(byName, p)
+    .commit();
+
+  if (!res.ok) {
+    throw new TypeError('Pokemon with id or name already exists');
+  }
+
+  context.response.body = 'Success!';
 };

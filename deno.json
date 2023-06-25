@@ -12,7 +12,7 @@
     "options": {
       "singleQuote": true,
       "useTabs": false,
-      "indentWidth": 4,
+      "indentWidth": 2,
       "lineWidth": 100
     }
   }

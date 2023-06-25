@@ -1,13 +1,17 @@
-import { RouterMiddleware } from 'https://deno.land/x/oak@v9.0.1/mod.ts';
+import { getQuery } from 'oak/helpers.ts';
+import { RouterMiddleware } from 'oak/mod.ts';
 import { Pokemon } from '../models/pokemon.ts';
 
-export const getPokemon: RouterMiddleware = async (context) => {
+export const getPokemon: RouterMiddleware<
+  '/',
+  { offset?: string; limit?: string }
+> = async (context) => {
   const DEFAULT_OFFSET = 1;
   const DEFAULT_LIMIT = 150;
 
-  const params = context.request.url.searchParams;
-  const offset = Number(params.get('offset')) || DEFAULT_OFFSET;
-  const limit = Number(params.get('limit')) || DEFAULT_LIMIT;
+  const params = getQuery(context);
+  const offset = Number(params.offset) || DEFAULT_OFFSET;
+  const limit = Number(params.limit) || DEFAULT_LIMIT;
 
   try {
     const kv = await Deno.openKv();
@@ -26,12 +30,13 @@ export const getPokemon: RouterMiddleware = async (context) => {
   }
 };
 
-export const getPokemonDetail: RouterMiddleware<{ idOrName: string }> = async (
-  context,
+export const getPokemonDetail: RouterMiddleware<'/:idOrName'> = async (
+  context
 ) => {
   const idOrName = Number.isNaN(Number(context.params.idOrName))
-    ? decodeURIComponent(context.params.idOrName).toLowerCase()
+    ? decodeURIComponent(context.params.idOrName!).toLowerCase()
     : Number(context.params.idOrName);
+
   try {
     const kv = await Deno.openKv();
     const { value } = await kv.get<Pokemon>([
@@ -50,7 +55,9 @@ export const getPokemonDetail: RouterMiddleware<{ idOrName: string }> = async (
   }
 };
 
-export const getPokemonOfTheDay: RouterMiddleware = async (context) => {
+export const getPokemonOfTheDay: RouterMiddleware<'/potd'> = async (
+  context
+) => {
   const pool = 905;
   const todaysDate = new Date().toDateString();
 
@@ -76,12 +83,14 @@ export const getPokemonOfTheDay: RouterMiddleware = async (context) => {
   }
 };
 
-export const migratePokemonToKv: RouterMiddleware = async (context) => {
+export const migratePokemonToKv: RouterMiddleware<'/migrate'> = async (
+  context
+) => {
   const body = context.request.body({ type: 'json' });
   const { id } = await body.value;
 
   const p: Pokemon = JSON.parse(
-    await Deno.readTextFile(`assets/data/${id}.json`),
+    await Deno.readTextFile(`assets/data/${id}.json`)
   );
 
   const primaryKey = ['pokemon', p.id];

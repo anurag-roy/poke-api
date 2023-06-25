@@ -1,4 +1,4 @@
-export interface PokemonBase {
+export type Pokemon = {
   id: number;
   name: string;
   genus: string;
@@ -9,9 +9,6 @@ export interface PokemonBase {
    * Hex code for the most dominant color in the image.
    */
   color: string;
-}
-
-export interface Pokemon extends PokemonBase {
   abilities: {
     name: string;
     effect: string;
@@ -19,4 +16,4 @@ export interface Pokemon extends PokemonBase {
   }[];
   stats: Record<string, number>;
   locations: string[];
-}
+};

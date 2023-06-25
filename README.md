@@ -29,28 +29,63 @@ Endpoint: `/pokemon?offset=150&limit=2`
   <summary>Response body</summary>
 
 ```json
-{
-  "id": 150,
-  "name": "Mewtwo",
-  "genus": "Genetic Pokémon",
-  "description": "It was created by a scientist after years of horrific gene splicing and DNA engineering experiments.",
-  "imageUrl": "https://pub-460ada4f152c4135a7ec0881a2cb1330.r2.dev/150.webp",
-  "types": [
-    "Psychic"
-  ],
-  "color":"#ded9e3"
-},
-{
-  "id": 151,
-  "name": "Mew",
-  "genus": "New Species Pokémon",
-  "description": "So rare that it is still said to be a mirage by many experts. Only a few people have seen it worldwide.",
-  "imageUrl": "https://pub-460ada4f152c4135a7ec0881a2cb1330.r2.dev/151.webp",
-  "types": [
-    "Psychic"
-  ],
-  "color":"#eec3cd"
-}
+[
+  {
+    "id": 150,
+    "name": "Mewtwo",
+    "genus": "Genetic Pokémon",
+    "description": "It was created by a scientist after years of horrific gene splicing and DNA engineering experiments.",
+    "imageUrl": "https://pub-460ada4f152c4135a7ec0881a2cb1330.r2.dev/150.webp",
+    "types": ["Psychic"],
+    "abilities": [
+      {
+        "name": "Pressure",
+        "effect": "Moves targetting this Pokémon use one extra PP.  This ability stacks if multiple targets have it.  This ability still affects moves that fail or miss.  This ability does not affect ally moves that target either the entire field or just its side, nor this Pokémon's self-targetted moves; it does, however, affect single-targetted ally moves aimed at this Pokémon, ally moves that target all other Pokémon, and opponents' moves that target the entire field.  If this ability raises a move's PP cost above its remaining PP, it will use all remaining PP.  When this Pokémon enters battle, all participating trainers are notified that it has this ability.  Overworld: If the lead Pokémon has this ability, higher-levelled Pokémon have their encounter rate increased.",
+        "description": "Raises foe's PP usage."
+      },
+      {
+        "name": "Unnerve",
+        "effect": "Opposing Pokémon cannot eat held Berries while this Pokémon is in battle.  Affected Pokémon can still use bug bite or pluck to eat a target's Berry.",
+        "description": "Makes the foe nervous and unable to eat Berries."
+      }
+    ],
+    "stats": {
+      "HP": 106,
+      "Attack": 110,
+      "Defense": 90,
+      "Special Attack": 154,
+      "Special Defense": 90,
+      "Speed": 130
+    },
+    "locations": ["Cerulean Cave"],
+    "color": "#f1eff3"
+  },
+  {
+    "id": 151,
+    "name": "Mew",
+    "genus": "New Species Pokémon",
+    "description": "So rare that it is still said to be a mirage by many experts. Only a few people have seen it worldwide.",
+    "imageUrl": "https://pub-460ada4f152c4135a7ec0881a2cb1330.r2.dev/151.webp",
+    "types": ["Psychic"],
+    "abilities": [
+      {
+        "name": "Synchronize",
+        "effect": "Whenever this Pokémon is burned, paralyzed, or poisoned, the Pokémon who gave this Pokémon that ailment is also given the ailment.  This ability passes back bad poison when this Pokémon is badly poisoned.  This ability cannot pass on a status ailment that the Pokémon did not directly receive from another Pokémon, such as the poison from toxic spikes or the burn from a flame orb.  Overworld: If the lead Pokémon has this ability, wild Pokémon have a 50% chance of having the lead Pokémon's nature, and a 50% chance of being given a random nature as usual, including the lead Pokémon's nature.  This does not work on Pokémon received outside of battle or roaming legendaries.",
+        "description": "Passes on status problems."
+      }
+    ],
+    "stats": {
+      "HP": 100,
+      "Attack": 100,
+      "Defense": 100,
+      "Special Attack": 100,
+      "Special Defense": 100,
+      "Speed": 100
+    },
+    "locations": ["Faraway Island"],
+    "color": "#f8e7eb"
+  }
+]
 ```
 
 </details>

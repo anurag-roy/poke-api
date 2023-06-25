@@ -14,7 +14,7 @@ const site = lume(
         typographer: true,
       },
     },
-  }
+  },
 );
 
 site.preprocess(['.md'], (page: Page) => {

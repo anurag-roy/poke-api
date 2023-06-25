@@ -3,7 +3,6 @@ import {
   getPokemon,
   getPokemonDetail,
   getPokemonOfTheDay,
-  migratePokemonToKv,
 } from '../controllers/pokemon.controller.ts';
 
 /**
@@ -15,7 +14,7 @@ const router = new Router({
 
 router.get('/', getPokemon);
 router.get('/potd', getPokemonOfTheDay);
-router.post('/migrate', migratePokemonToKv);
+// router.post('/migrate', migratePokemonToKv);
 router.get('/:idOrName', getPokemonDetail);
 
 export default router;

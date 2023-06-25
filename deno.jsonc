@@ -15,11 +15,9 @@
     "jsxImportSource": "https://esm.sh/react@18.0.0"
   },
   "fmt": {
-    "options": {
-      "singleQuote": true,
-      "useTabs": false,
-      "indentWidth": 2,
-      "lineWidth": 100
-    }
+    "singleQuote": true,
+    "useTabs": false,
+    "indentWidth": 2,
+    "lineWidth": 100
   }
 }

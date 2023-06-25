@@ -31,7 +31,7 @@ export const getPokemon: RouterMiddleware<
 };
 
 export const getPokemonDetail: RouterMiddleware<'/:idOrName'> = async (
-  context
+  context,
 ) => {
   const idOrName = Number.isNaN(Number(context.params.idOrName))
     ? decodeURIComponent(context.params.idOrName!).toLowerCase()
@@ -56,7 +56,7 @@ export const getPokemonDetail: RouterMiddleware<'/:idOrName'> = async (
 };
 
 export const getPokemonOfTheDay: RouterMiddleware<'/potd'> = async (
-  context
+  context,
 ) => {
   const pool = 905;
   const todaysDate = new Date().toDateString();
@@ -84,13 +84,13 @@ export const getPokemonOfTheDay: RouterMiddleware<'/potd'> = async (
 };
 
 export const migratePokemonToKv: RouterMiddleware<'/migrate'> = async (
-  context
+  context,
 ) => {
   const body = context.request.body({ type: 'json' });
   const { id } = await body.value;
 
   const p: Pokemon = JSON.parse(
-    await Deno.readTextFile(`assets/data/${id}.json`)
+    await Deno.readTextFile(`assets/data/${id}.json`),
   );
 
   const primaryKey = ['pokemon', p.id];

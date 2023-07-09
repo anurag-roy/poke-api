@@ -402,9 +402,9 @@
     "https://deno.land/x/oak@v12.5.0/types.d.ts": "bca5f38683ca2bb2b1ec841324a3c2e1c468e734151c9526af61c9257b016aca",
     "https://deno.land/x/oak@v12.5.0/util.ts": "0a3fdffb114859c2de84e1783efa3a544af4d2af8c6f08e0d25655de9d3e69bb",
     "https://deno.land/x/path_to_regexp@v6.2.1/index.ts": "894060567837bae8fc9c5cbd4d0a05e9024672083d5883b525c031eea940e556",
-    "https://esm.sh/react@18.0.0/jsx-runtime": "566c7d324f870fba72216703befcba3fc9dbffe20a5db2174ca7f728caca03fe",
-    "https://esm.sh/stable/react@18.0.0/denonext/jsx-runtime.js": "480ceee4b8888fb49f6c75ea6b50d1db4240683fc9221e343c1b6ef775b0b381",
-    "https://esm.sh/stable/react@18.0.0/denonext/react.mjs": "4f24a7aa3e27a3b80c6912be3d7a9676ff1abe0c75b969612e2e54f4490c9504"
+    "https://esm.sh/react@18.2.0/jsx-runtime": "914a55a07c388d345c5a0c11616ee5282242e8b8dfd0d505b83500ea04fd9870",
+    "https://esm.sh/stable/react@18.2.0/denonext/jsx-runtime.js": "54d8a51c6ca025380abd2d5302e4a9b38ff835d9759c4657e52314f587eaf6bf",
+    "https://esm.sh/stable/react@18.2.0/denonext/react.mjs": "3c4f23bcfc53b256fcfaf6f834fa9f584c3bb7be667b2682c6cb6ba8ef88f8e6"
   },
   "npm": {
     "specifiers": {

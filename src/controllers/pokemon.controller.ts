@@ -1,6 +1,6 @@
 import { getQuery } from 'oak/helpers.ts';
 import { RouterMiddleware } from 'oak/mod.ts';
-import { Pokemon } from '../models/pokemon.ts';
+import { Pokemon, PokemonOfTheDay } from '../models/pokemon.ts';
 
 export const getPokemon: RouterMiddleware<
   '/',
@@ -63,9 +63,9 @@ export const getPokemonOfTheDay: RouterMiddleware<'/potd'> = async (
 
   try {
     const kv = await Deno.openKv();
-    const { value: existingPotd } = await kv.get<Pokemon>(['potd', todaysDate]);
-    if (existingPotd) {
-      context.response.body = existingPotd;
+    const { value } = await kv.get<PokemonOfTheDay>(['potd']);
+    if (value && value.date === todaysDate) {
+      context.response.body = value.pokemon;
       kv.close();
     } else {
       const randomNumber = Math.ceil(Math.random() * pool);
@@ -73,7 +73,10 @@ export const getPokemonOfTheDay: RouterMiddleware<'/potd'> = async (
         'pokemon',
         randomNumber,
       ]);
-      await kv.set(['potd', todaysDate], pokemonData);
+      await kv.set(['potd'], {
+        pokemon: pokemonData,
+        date: todaysDate,
+      });
       context.response.body = pokemonData;
       kv.close();
     }

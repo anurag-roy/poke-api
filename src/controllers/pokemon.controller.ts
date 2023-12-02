@@ -1,6 +1,6 @@
 import { getQuery } from 'oak/helpers.ts';
 import { RouterMiddleware } from 'oak/mod.ts';
-import { Pokemon, PokemonOfTheDay } from '../models/pokemon.ts';
+import { Pokemon } from '../models/pokemon.ts';
 
 export const getPokemon: RouterMiddleware<
   '/',
@@ -31,7 +31,7 @@ export const getPokemon: RouterMiddleware<
 };
 
 export const getPokemonDetail: RouterMiddleware<'/:idOrName'> = async (
-  context,
+  context
 ) => {
   const idOrName = Number.isNaN(Number(context.params.idOrName))
     ? decodeURIComponent(context.params.idOrName!).toLowerCase()
@@ -56,30 +56,13 @@ export const getPokemonDetail: RouterMiddleware<'/:idOrName'> = async (
 };
 
 export const getPokemonOfTheDay: RouterMiddleware<'/potd'> = async (
-  context,
+  context
 ) => {
-  const pool = 905;
-  const todaysDate = new Date().toDateString();
-
   try {
     const kv = await Deno.openKv();
-    const { value } = await kv.get<PokemonOfTheDay>(['potd']);
-    if (value && value.date === todaysDate) {
-      context.response.body = value.pokemon;
-      kv.close();
-    } else {
-      const randomNumber = Math.ceil(Math.random() * pool);
-      const { value: pokemonData } = await kv.get<Pokemon>([
-        'pokemon',
-        randomNumber,
-      ]);
-      await kv.set(['potd'], {
-        pokemon: pokemonData,
-        date: todaysDate,
-      });
-      context.response.body = pokemonData;
-      kv.close();
-    }
+    const { value } = await kv.get<Pokemon>(['potd']);
+    context.response.body = value;
+    kv.close();
   } catch (error) {
     console.log(error);
     context.throw(500, 'Internal server error');
@@ -87,13 +70,13 @@ export const getPokemonOfTheDay: RouterMiddleware<'/potd'> = async (
 };
 
 export const migratePokemonToKv: RouterMiddleware<'/migrate'> = async (
-  context,
+  context
 ) => {
   const body = context.request.body({ type: 'json' });
   const { id } = await body.value;
 
   const p: Pokemon = JSON.parse(
-    await Deno.readTextFile(`assets/data/${id}.json`),
+    await Deno.readTextFile(`assets/data/${id}.json`)
   );
 
   const primaryKey = ['pokemon', p.id];
@@ -113,4 +96,17 @@ export const migratePokemonToKv: RouterMiddleware<'/migrate'> = async (
   }
 
   context.response.body = 'Success!';
+};
+
+export const setPokemonOfTheDay = async () => {
+  const pool = 905;
+  const kv = await Deno.openKv();
+
+  const randomNumber = Math.ceil(Math.random() * pool);
+  const { value: pokemonData } = await kv.get<Pokemon>([
+    'pokemon',
+    randomNumber,
+  ]);
+  await kv.set(['potd'], pokemonData);
+  kv.close();
 };

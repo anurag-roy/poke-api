@@ -17,8 +17,3 @@ export type Pokemon = {
   stats: Record<string, number>;
   locations: string[];
 };
-
-export type PokemonOfTheDay = {
-  pokemon: Pokemon;
-  date: string;
-};

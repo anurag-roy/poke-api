@@ -4,7 +4,6 @@
     "oak/": "https://deno.land/x/oak@v12.5.0/"
   },
   "tasks": {
-    // TODO: Remove `--unstable` once KV becomes stable
     "dev": "deno run --unstable --allow-net --allow-read --watch src/index.ts",
     "lume": "echo \"import 'lume/cli.ts'\" | deno run --unstable -A -",
     "build": "deno task lume",

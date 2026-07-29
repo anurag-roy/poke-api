@@ -1,4 +1,3 @@
-import { homeStyles } from './home-styles';
 import { PokeballSvg } from './pokeball';
 
 export function HomePage() {
@@ -19,7 +18,8 @@ export function HomePage() {
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
           rel="stylesheet"
         />
-        <style>{homeStyles}</style>
+        {/* Served as a static asset — Hono JSX escapes quotes inside <style>, which breaks font-family. */}
+        <link rel="stylesheet" href="/home.css" />
       </head>
       <body>
         <nav class="nav">

@@ -1,5 +1,3 @@
-/** Dark Pokéball-inspired homepage — Inter + JetBrains Mono. */
-export const homeStyles = `
   :root {
     color-scheme: dark;
     --bg: #0a0a0a;
@@ -616,4 +614,3 @@ export const homeStyles = `
       transition-duration: 0.01ms !important;
     }
   }
-`;

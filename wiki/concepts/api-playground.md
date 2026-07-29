@@ -32,7 +32,7 @@ So: **SSR shell in Hono JSX + focused vanilla module** for playground state/DOM.
 
 ## Static assets
 
-Wrangler [`assets.directory`](../../wrangler.jsonc) = `public/` (favicon, `playground.js`). Default asset-first routing serves those files; API + `/` stay on the Worker.
+Wrangler [`assets.directory`](../../wrangler.jsonc) = `public/` (favicon, `home.css`, `playground.js`). Homepage CSS is a static file — Hono JSX escapes quotes inside inline `<style>`, which breaks `font-family`. Default asset-first routing serves matching paths; API + `/` stay on the Worker.
 
 ## Related
 

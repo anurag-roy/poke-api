@@ -88,3 +88,14 @@ Out of scope unless asked: general Pokémon lore encyclopedias, unrelated Cloudf
 - When code changes materially (API shape, schema, deploy URL, bindings), update the wiki in the same session if you made or reviewed those changes.
 - Prefer linking to paths like `src/index.tsx` over pasting large code blocks.
 - Secrets and tokens never go in the wiki.
+
+## Cursor Cloud specific instructions
+
+Local dev is a Cloudflare Worker run via `wrangler dev` (workerd/miniflare) with a **local** D1 SQLite DB under `.wrangler/` — no Cloudflare account/login is needed for local development or the CI `check`. Standard commands live in `package.json` and `README.md`; below are only the non-obvious caveats.
+
+- One-time-per-VM data setup (the update script does NOT do this): after deps are installed, run `npm run db:migrate:local` then `npm run seed`. Local D1 state lives in `.wrangler/` (gitignored), so it does not persist across fresh VMs and must be re-created before `npm run dev` returns data.
+- `npm run seed` fetches all ~1025 Pokémon over the network from the public R2 host (`pub-460ada4f152c4135a7ec0881a2cb1330.r2.dev`) and shells out to `wrangler d1 execute`; it takes ~60s and requires outbound internet. It is idempotent (upserts).
+- Run wrangler non-interactively with `CI=1` (it otherwise prompts for telemetry/migration confirmation). Start dev with an explicit port, e.g. `CI=1 npx wrangler dev --port 8787 --ip 127.0.0.1`.
+- **Lint/typecheck:** there is no separate lint or test suite. The CI `check` is the typecheck + bundle dry-run: `npx wrangler deploy --dry-run --outdir=/tmp/poke-api-build`. Use it as the "does it compile/bundle" gate.
+- To exercise the POTD cron write path locally, start dev with `--test-scheduled` and hit `http://127.0.0.1:8787/__scheduled?cron=0+0+*+*+*`; then re-check `/pokemon/potd`.
+- `*:remote` scripts and `npm run deploy` require Cloudflare auth (`CLOUDFLARE_API_TOKEN`) and hit production D1/R2 — do not run them for local verification.

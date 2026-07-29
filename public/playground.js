@@ -7,7 +7,7 @@ const ENDPOINTS = [
   {
     id: 'list',
     label: 'List Pokémon',
-    description: 'Paginate from a National Dex id.',
+    pathLabel: '/pokemon',
     method: 'GET',
     path: '/pokemon',
     query: [
@@ -27,8 +27,8 @@ const ENDPOINTS = [
   },
   {
     id: 'one',
-    label: 'Get by id or name',
-    description: 'Lookup a single Pokémon.',
+    label: 'By id or name',
+    pathLabel: '/pokemon/:idOrName',
     method: 'GET',
     pathTemplate: '/pokemon/:idOrName',
     pathParams: [
@@ -43,7 +43,7 @@ const ENDPOINTS = [
   {
     id: 'potd',
     label: 'Pokémon of the day',
-    description: 'Today’s featured Pokémon.',
+    pathLabel: '/pokemon/potd',
     method: 'GET',
     path: '/pokemon/potd',
   },
@@ -73,8 +73,11 @@ function init() {
   els.tabs.innerHTML = ENDPOINTS.map(
     (ep, i) => `
       <button type="button" class="tab${i === 0 ? ' is-active' : ''}" data-id="${ep.id}" role="tab" aria-selected="${i === 0}">
-        <span class="tab-label">${ep.label}</span>
-        <span class="tab-desc">${ep.description}</span>
+        <span class="method-tag">${ep.method}</span>
+        <span>
+          <span class="tab-label">${ep.label}</span>
+          <span class="tab-path">${ep.pathLabel}</span>
+        </span>
       </button>
     `,
   ).join('');
@@ -225,18 +228,18 @@ async function sendRequest() {
       }
     }
 
-    els.status.textContent = String(res.status);
+    els.status.textContent = res.ok ? `${res.status} OK` : String(res.status);
     els.status.className = `status-pill ${res.ok ? 'is-ok' : 'is-err'}`;
-    els.meta.textContent = `${elapsed} ms · ${formatBytes(text.length)}`;
+    els.meta.textContent = `${elapsed}ms · ${formatBytes(text.length)}`;
     els.body.textContent = display || '(empty response)';
     requestAnimationFrame(() => els.body.classList.add('is-pop'));
 
     renderPreview(parsed);
   } catch (error) {
     const elapsed = Math.round(performance.now() - started);
-    els.status.textContent = 'ERR';
+    els.status.textContent = 'Error';
     els.status.className = 'status-pill is-err';
-    els.meta.textContent = `${elapsed} ms`;
+    els.meta.textContent = `${elapsed}ms`;
     els.body.textContent =
       error instanceof Error ? error.message : 'Request failed';
     requestAnimationFrame(() => els.body.classList.add('is-pop'));
@@ -257,30 +260,39 @@ function renderPreview(parsed) {
     return;
   }
 
+  const id =
+    typeof pokemon.id === 'number'
+      ? `#${String(pokemon.id).padStart(4, '0')}`
+      : '';
+
   const types = Array.isArray(pokemon.types)
-    ? pokemon.types.map((t) => `<span class="type-chip">${escapeHtml(String(t))}</span>`).join('')
+    ? pokemon.types
+        .map((t) => `<span class="type-chip">${escapeHtml(String(t))}</span>`)
+        .join('')
     : '';
 
   els.preview.hidden = false;
   els.preview.innerHTML = `
-    <img src="${escapeAttr(pokemon.imageUrl)}" alt="${escapeAttr(pokemon.name ?? 'Pokémon')}" width="96" height="96" loading="lazy" />
+    <img src="${escapeAttr(pokemon.imageUrl)}" alt="${escapeAttr(pokemon.name ?? 'Pokémon')}" width="80" height="80" loading="lazy" />
     <div>
       <p class="preview-name">${escapeHtml(pokemon.name ?? 'Unknown')}</p>
-      <p class="preview-genus">${escapeHtml(pokemon.genus ?? '')}</p>
+      <p class="preview-genus">${escapeHtml(id || pokemon.genus || '')}</p>
       <div class="preview-types">${types}</div>
     </div>
   `;
-  els.preview.style.setProperty('--poke-color', pokemon.color || '#e3350d');
 }
 
 /**
  * @param {unknown} data
- * @returns {{ name?: string, genus?: string, imageUrl?: string, types?: string[], color?: string } | null}
+ * @returns {{ id?: number, name?: string, genus?: string, imageUrl?: string, types?: string[], color?: string } | null}
  */
 function pickPokemon(data) {
   if (!data || typeof data !== 'object') return null;
   if (Array.isArray(data)) {
-    return data.find((item) => item && typeof item === 'object' && 'imageUrl' in item) ?? null;
+    return (
+      data.find((item) => item && typeof item === 'object' && 'imageUrl' in item) ??
+      null
+    );
   }
   if ('imageUrl' in data) return data;
   return null;

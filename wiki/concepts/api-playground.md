@@ -6,7 +6,7 @@ updated: 2026-07-29
 
 # API playground
 
-Interactive try-it panel on the Worker homepage (`/` → [`src/pages/home.tsx`](../../src/pages/home.tsx)). Not Scalar/Swagger — a small custom client that fires same-origin `fetch` calls against the live API.
+Interactive try-it panel on the Worker homepage (`/` → [`src/pages/home.tsx`](../../src/pages/home.tsx)). Dark Pokéball-themed landing (Inter + JetBrains Mono, SVG mark — no coin logo). Not Scalar/Swagger — a small custom client that fires same-origin `fetch` calls against the live API.
 
 ## What it covers
 
@@ -32,7 +32,7 @@ So: **SSR shell in Hono JSX + focused vanilla module** for playground state/DOM.
 
 ## Static assets
 
-Wrangler [`assets.directory`](../../wrangler.jsonc) = `public/` (logo, favicon, `playground.js`). Default asset-first routing serves those files; API + `/` stay on the Worker.
+Wrangler [`assets.directory`](../../wrangler.jsonc) = `public/` (favicon, `playground.js`). Default asset-first routing serves those files; API + `/` stay on the Worker.
 
 ## Related
 

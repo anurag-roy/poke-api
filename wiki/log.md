@@ -21,3 +21,7 @@ Built append-only generate pipeline (`scripts/generate-pokemon.ts`): PokéAPI HT
 ## [2026-07-29] query | Homepage theme + playground
 
 Red/white Pokéball-inspired homepage redesign with a custom in-page API playground (`public/playground.js`). Chose vanilla ES module over `hono/jsx/dom`/HonoX because the project has no Vite dual-build. Added Wrangler `assets.directory` = `public/`. Filed [[api-playground]].
+
+## [2026-07-29] query | Homepage Figma adapt
+
+Adapted dark Figma Make mockup: Inter + JetBrains Mono, SVG Pokéball (dropped coin logo), lean nav/hero/endpoints/playground — no marketing feature grid. Still vanilla client module.

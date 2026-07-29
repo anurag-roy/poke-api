@@ -15,7 +15,7 @@ Cloudflare Worker script named **`poke-api`**. Entry: [`src/index.tsx`](../../sr
 | `DB` | D1 `poke-api` | Runtime reads/writes (list, detail, POTD meta) |
 | `POKEAPI_BUCKET` | R2 `pokeapi` | Declared for the seed/source bucket; runtime API does not read R2 |
 
-Static files from Wrangler **assets** (`public/`): logo, favicon, playground client. No `ASSETS` binding — platform asset-first routing serves matching paths.
+Static files from Wrangler **assets** (`public/`): favicon, playground client. No `ASSETS` binding — platform asset-first routing serves matching paths.
 
 ## Triggers
 

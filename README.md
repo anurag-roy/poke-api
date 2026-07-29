@@ -2,7 +2,7 @@
 
 <img src="/assets/logo/logo.webp" width="140" title="Pokédex API Logo" />
 
-A dead simple Pokédex API powered by Deno KV.
+A dead simple Pokédex API powered by Cloudflare Workers + D1.
 
 </div>
 
@@ -146,7 +146,7 @@ Endpoint: `/pokemon/150`
 
 ---
 
-#### Get Pokémon by National Pokédex Index
+#### Get Pokémon by name
 
 ```http
 GET /pokemon/:name
@@ -245,14 +245,34 @@ Endpoint: `/pokemon/potd`
 
 ---
 
+## Development
+
+```bash
+npm install
+npm run db:migrate:local
+npm run seed                 # load 905 Pokémon from the pokeapi R2 bucket into local D1
+npm run dev
+```
+
+Remote (production D1):
+
+```bash
+npm run db:migrate:remote
+npm run seed:remote
+npm run deploy
+```
+
+Pokémon of the Day is rotated daily at `00:00` UTC via a Workers Cron Trigger.
+
 ## Why
 
-1. This started out as an API to just test out [Deno Deploy](https://deno.com/deploy/).
-2. Now, it's just my defacto API when trying out some new frontend tool/framework.
+1. This started out as an API to test [Deno Deploy](https://deno.com/deploy/).
+2. It now runs on [Cloudflare Workers](https://workers.cloudflare.com/) with [D1](https://developers.cloudflare.com/d1/) for storage.
+3. It's my default API when trying out a new frontend tool/framework.
 
 The data was prepared from [PokéAPI's api-data](https://github.com/PokeAPI/api-data) using this
-simple [script](https://gist.github.com/anurag-roy/6b39fff1cfe89fcf7132e95b6ac66de1). Also all the
-images are in `.webp` to speed things up a bit.
+simple [script](https://gist.github.com/anurag-roy/6b39fff1cfe89fcf7132e95b6ac66de1). Images are `.webp`
+and hosted on Cloudflare R2.
 
 ## Additional Resources
 
@@ -260,7 +280,8 @@ images are in `.webp` to speed things up a bit.
 - [Gist to create custom pokémon data](https://gist.github.com/anurag-roy/6b39fff1cfe89fcf7132e95b6ac66de1)
 - [Gist to convert images to .webp](https://gist.github.com/anurag-roy/86f312125bf76f0b93c10492c162b26f)
 - [Extract dominant color from images](https://github.com/anurag-roy/get-dominant-color)
-- [Deno Deploy Docs](https://deno.com/deploy/docs/)
+- [Cloudflare Workers Docs](https://developers.cloudflare.com/workers/)
+- [Cloudflare D1 Docs](https://developers.cloudflare.com/d1/)
 
 ## Credits
 

@@ -25,3 +25,7 @@ Red/white Pokéball-inspired homepage redesign with a custom in-page API playgro
 ## [2026-07-29] query | Homepage Figma adapt
 
 Adapted dark Figma Make mockup: Inter + JetBrains Mono, SVG Pokéball (dropped coin logo), lean nav/hero/endpoints/playground — no marketing feature grid. Still vanilla client module.
+
+## [2026-07-29] query | Fix homepage font escaping
+
+Hono JSX was HTML-escaping quotes inside inline `<style>`, so `font-family: 'Inter'` became invalid (`&#39;Inter&#39;`) and fell back to serif. Moved styles to static `public/home.css`.

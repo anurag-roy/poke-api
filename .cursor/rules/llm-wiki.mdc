@@ -1,0 +1,13 @@
+---
+description: Maintain the poke-api LLM Wiki (raw/, wiki/, AGENTS.md)
+alwaysApply: true
+---
+
+# LLM Wiki
+
+This repo uses an LLM Wiki. Follow [`AGENTS.md`](../../AGENTS.md):
+
+- **Read-only:** `raw/` (never edit raw sources)
+- **Write:** `wiki/` (agents own this layer)
+- On ingest / filed answers / material code knowledge changes: update pages, `wiki/index.md`, and append `wiki/log.md`
+- Start answers from `wiki/index.md` when the question is about project knowledge

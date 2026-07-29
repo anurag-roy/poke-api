@@ -15,6 +15,8 @@ Cloudflare Worker script named **`poke-api`**. Entry: [`src/index.tsx`](../../sr
 | `DB` | D1 `poke-api` | Runtime reads/writes (list, detail, POTD meta) |
 | `POKEAPI_BUCKET` | R2 `pokeapi` | Declared for the seed/source bucket; runtime API does not read R2 |
 
+Static files from Wrangler **assets** (`public/`): logo, favicon, playground client. No `ASSETS` binding — platform asset-first routing serves matching paths.
+
 ## Triggers
 
 - HTTP: `*.workers.dev` (and any custom routes if added later)
@@ -24,7 +26,7 @@ Cloudflare Worker script named **`poke-api`**. Entry: [`src/index.tsx`](../../sr
 
 | Method | Path | Handler |
 | --- | --- | --- |
-| GET | `/` | JSX landing page ([`src/pages/home.tsx`](../../src/pages/home.tsx)) |
+| GET | `/` | JSX landing + playground ([`src/pages/home.tsx`](../../src/pages/home.tsx)) |
 | GET | `/pokemon` | List by id range |
 | GET | `/pokemon/potd` | Daily pick |
 | GET | `/pokemon/:idOrName` | Detail by numeric id or name |

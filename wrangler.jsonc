@@ -12,6 +12,11 @@
 		"enabled": true
 	},
 	"upload_source_maps": true,
+	// Static homepage assets (logo, favicon, playground client). Default
+	// asset-first routing serves matching files; everything else hits the Worker.
+	"assets": {
+		"directory": "./public"
+	},
 	"triggers": {
 		"crons": ["0 0 * * *"]
 	},

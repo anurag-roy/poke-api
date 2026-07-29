@@ -10,7 +10,7 @@ Stable contract for widget clients. Implemented in [`src/index.tsx`](../../src/i
 
 | Method | Path | Notes |
 | --- | --- | --- |
-| GET | `/` | HTML docs landing (Hono JSX), not JSON |
+| GET | `/` | HTML landing + [API playground](api-playground.md) (Hono JSX), not JSON |
 | GET | `/pokemon` | Query: `offset` (default **1**, starting id), `limit` (default **150**). Returns `Pokemon[]` |
 | GET | `/pokemon/potd` | One `Pokemon` (or null-ish if unset) |
 | GET | `/pokemon/:idOrName` | Numeric → id; else lowercased name. 404 text: `Pokemon not found!` |

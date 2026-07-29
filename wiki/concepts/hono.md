@@ -11,7 +11,9 @@ Lightweight web framework used for the Worker. Project was scaffolded with `crea
 - JSX for the homepage: `jsxImportSource` = `hono/jsx` ([`tsconfig.json`](../../tsconfig.json))
 - CORS middleware: `hono/cors`
 - App typed with `CloudflareBindings` from `wrangler types`
+- Homepage interactivity: vanilla ES module, not `hono/jsx/dom` / HonoX (see [API playground](api-playground.md))
 
 ## Related
 
 - [poke-api Worker](../entities/poke-api-worker.md)
+- [API playground](api-playground.md)

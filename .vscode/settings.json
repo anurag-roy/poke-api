@@ -1,10 +1,5 @@
 {
-  "deno.enable": true,
-  "deno.lint": true,
-  "deno.unstable": true,
-  "deno.config": "./deno.jsonc",
-  "deno.suggest.autoImports": true,
-  "deno.suggest.imports.hosts": {
-    "https://deno.land": true
-  }
+	"files.associations": {
+		"wrangler.json": "jsonc"
+	}
 }

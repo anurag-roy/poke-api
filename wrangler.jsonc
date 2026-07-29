@@ -1,0 +1,34 @@
+/**
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "poke-api",
+	"main": "src/index.tsx",
+	"compatibility_date": "2026-07-29",
+	"compatibility_flags": ["nodejs_compat"],
+	"observability": {
+		"enabled": true
+	},
+	"upload_source_maps": true,
+	"triggers": {
+		"crons": ["0 0 * * *"]
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "poke-api",
+			"database_id": "b74c2f1f-1724-4452-9b44-e1ea1907a731",
+			"migrations_dir": "migrations"
+		}
+	],
+	// R2 bucket holds source JSON (seed) and public image URLs inside Pokemon detail.
+	// Runtime reads are D1-only; seed script pulls from the bucket's public host.
+	"r2_buckets": [
+		{
+			"binding": "POKEAPI_BUCKET",
+			"bucket_name": "pokeapi"
+		}
+	]
+}

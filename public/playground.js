@@ -98,6 +98,7 @@ function init() {
   });
 
   selectEndpoint(active.id);
+  void sendRequest();
 }
 
 /**

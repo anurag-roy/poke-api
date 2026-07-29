@@ -28,6 +28,7 @@ Catalog of the poke-api LLM Wiki. Agents: read this first when answering questio
 | [concepts/seed-pipeline.md](concepts/seed-pipeline.md) | R2 → D1 CLI seed |
 | [concepts/pokemon-of-the-day.md](concepts/pokemon-of-the-day.md) | Daily cron + `potd_id` |
 | [concepts/hono.md](concepts/hono.md) | Hono framework usage |
+| [concepts/api-playground.md](concepts/api-playground.md) | Custom homepage API playground + client reactivity choice |
 
 ## Sources
 

@@ -39,3 +39,6 @@ lerna-debug.log*
 # old lume output
 _site
 
+# generated Pokémon JSON / WebP (upload to R2; do not commit)
+data/generated/
+

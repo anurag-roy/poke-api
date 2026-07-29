@@ -24,6 +24,7 @@ Catalog of the poke-api LLM Wiki. Agents: read this first when answering questio
 | [concepts/architecture.md](concepts/architecture.md) | Deno → Workers migration architecture |
 | [concepts/api-surface.md](concepts/api-surface.md) | Stable HTTP API for widgets |
 | [concepts/pokemon-data-model.md](concepts/pokemon-data-model.md) | Pokémon JSON fields |
+| [concepts/generate-pipeline.md](concepts/generate-pipeline.md) | Append National Dex JSON/WebP from PokéAPI |
 | [concepts/seed-pipeline.md](concepts/seed-pipeline.md) | R2 → D1 CLI seed |
 | [concepts/pokemon-of-the-day.md](concepts/pokemon-of-the-day.md) | Daily cron + `potd_id` |
 | [concepts/hono.md](concepts/hono.md) | Hono framework usage |

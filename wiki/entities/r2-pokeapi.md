@@ -12,9 +12,11 @@ Cloudflare R2 bucket holding Pokémon JSON and images.
 
 | Key pattern | Purpose |
 | --- | --- |
-| `index.json` | Array of summary entries (905 items) — used as seed inventory |
+| `index.json` | Array of summary entries used as seed inventory (length = catalog size) |
 | `{id}.json` | Full detail document for one Pokémon |
-| `{id}.webp` | Sprite / artwork (referenced by `imageUrl` in JSON) |
+| `{id}.webp` | Artwork with baked background (referenced by `imageUrl` in JSON) |
+
+After publishing the 2026-07-29 append batch: **1025** species (906–1025 added locally under `data/generated/` until uploaded).
 
 ## Public host
 
@@ -31,4 +33,5 @@ The API does **not** proxy images. Clients load `imageUrl` directly from this ho
 ## Related
 
 - [Seed pipeline](../concepts/seed-pipeline.md)
+- [Generate pipeline](../concepts/generate-pipeline.md)
 - [D1 database](d1-database.md)

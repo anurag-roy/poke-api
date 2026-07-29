@@ -250,7 +250,7 @@ Endpoint: `/pokemon/potd`
 ```bash
 npm install
 npm run db:migrate:local
-npm run seed                 # load 905 Pokémon from the pokeapi R2 bucket into local D1
+npm run seed                 # load Pokémon from the pokeapi R2 bucket into local D1
 npm run dev
 ```
 
@@ -262,7 +262,33 @@ npm run seed:remote
 npm run deploy
 ```
 
-Pokémon of the Day is rotated daily at `00:00` UTC via a Workers Cron Trigger.
+Pokémon of the Day is rotated daily at `00:00` UTC via a Workers Cron Trigger (pool size = D1 row count).
+
+### Refreshing National Dex data (append)
+
+Catalog size comes from R2 / D1, not a hardcoded constant. To generate **new** default National Dex entries after the ones already on R2 (historically through #905):
+
+```bash
+npm run generate:pokemon
+```
+
+This writes gitignored artifacts under `data/generated/`:
+
+- `{id}.json` / `{id}.webp` for each new id
+- `index.json` — full catalog (existing R2 index through #905 + new summaries)
+
+Upload to the `pokeapi` R2 bucket (new objects + full `index.json`), then re-seed:
+
+```bash
+# Requires wrangler auth. Uploads every file in data/generated/ (incl. index.json).
+for f in data/generated/*; do
+  npx wrangler r2 object put "pokeapi/$(basename "$f")" --file="$f" --remote
+done
+
+npm run seed:remote
+```
+
+Ids **1–905** are left unchanged by the generator (append-only).
 
 ## Why
 
@@ -270,15 +296,15 @@ Pokémon of the Day is rotated daily at `00:00` UTC via a Workers Cron Trigger.
 2. It now runs on [Cloudflare Workers](https://workers.cloudflare.com/) with [D1](https://developers.cloudflare.com/d1/) for storage.
 3. It's my default API when trying out a new frontend tool/framework.
 
-The data was prepared from [PokéAPI's api-data](https://github.com/PokeAPI/api-data) using this
-simple [script](https://gist.github.com/anurag-roy/6b39fff1cfe89fcf7132e95b6ac66de1). Images are `.webp`
-and hosted on Cloudflare R2.
+Original 1–905 data was prepared from [PokéAPI's api-data](https://github.com/PokeAPI/api-data) using this
+[gist](https://gist.github.com/anurag-roy/6b39fff1cfe89fcf7132e95b6ac66de1). Newer entries are produced by
+[`scripts/generate-pokemon.ts`](scripts/generate-pokemon.ts) (PokéAPI HTTP + official artwork → lightened
+dominant-color background → WebP). Images are hosted on Cloudflare R2.
 
 ## Additional Resources
 
-- [PokéAPI pokémon data including sprites and official artwork](https://github.com/PokeAPI/api-data)
-- [Gist to create custom pokémon data](https://gist.github.com/anurag-roy/6b39fff1cfe89fcf7132e95b6ac66de1)
-- [Gist to convert images to .webp](https://gist.github.com/anurag-roy/86f312125bf76f0b93c10492c162b26f)
+- [PokéAPI](https://pokeapi.co/) / [api-data](https://github.com/PokeAPI/api-data) / [sprites](https://github.com/PokeAPI/sprites)
+- [Original gist to create custom pokémon data](https://gist.github.com/anurag-roy/6b39fff1cfe89fcf7132e95b6ac66de1)
 - [Extract dominant color from images](https://github.com/anurag-roy/get-dominant-color)
 - [Cloudflare Workers Docs](https://developers.cloudflare.com/workers/)
 - [Cloudflare D1 Docs](https://developers.cloudflare.com/d1/)

@@ -25,7 +25,10 @@ npm run seed:remote        # remote D1
 
 No HTTP migrate route — keeps the public API surface identical for widgets.
 
+To **create** new National Dex JSON/WebP before seeding, see [generate pipeline](generate-pipeline.md).
+
 ## Related
 
 - [R2 pokeapi](../entities/r2-pokeapi.md)
 - [D1 database](../entities/d1-database.md)
+- [Generate pipeline](generate-pipeline.md)

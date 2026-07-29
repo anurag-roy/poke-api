@@ -13,3 +13,7 @@ Ingested migration decisions and outcomes. Created overview, Worker/D1/R2/CI ent
 ## [2026-07-29] ingest | README.md
 
 Aligned API defaults and public docs with wiki API/data-model pages.
+
+## [2026-07-29] query | Append National Dex 906+
+
+Built append-only generate pipeline (`scripts/generate-pokemon.ts`): PokéAPI HTTP + official artwork, lightened dominant color (0.4), WebP via sharp, p-queue fair use. Generated **120** species (906–1025) into gitignored `data/generated/` (full index 1025). Documented R2 upload + `seed:remote` (human publish gate). Updated data-model / R2 / seed pages; added [[generate-pipeline]].

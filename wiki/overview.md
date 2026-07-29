@@ -39,11 +39,12 @@ flowchart LR
   R2 -->|"public imageUrl in JSON"| Widgets
 ```
 
-Runtime path is **Worker → D1 only**. R2 is for seeding and for public `.webp` URLs embedded in stored JSON.
+Runtime path is **Worker → D1 only**. R2 is for seeding and for public `.webp` URLs embedded in stored JSON. New National Dex rows are built with the [generate pipeline](concepts/generate-pipeline.md), then uploaded to R2 and seeded.
 
 ## Related
 
 - [Architecture](concepts/architecture.md)
+- [Generate pipeline](concepts/generate-pipeline.md)
 - [Seed pipeline](concepts/seed-pipeline.md)
 - [Pokémon of the Day](concepts/pokemon-of-the-day.md)
 - [Data model](concepts/pokemon-data-model.md)

@@ -7,13 +7,16 @@
     "seed": "tsx scripts/seed.ts",
     "seed:remote": "tsx scripts/seed.ts --remote",
     "db:migrate:local": "wrangler d1 migrations apply poke-api --local",
-    "db:migrate:remote": "wrangler d1 migrations apply poke-api --remote"
+    "db:migrate:remote": "wrangler d1 migrations apply poke-api --remote",
+    "generate:pokemon": "tsx scripts/generate-pokemon.ts"
   },
   "dependencies": {
     "hono": "^4.12.32"
   },
   "devDependencies": {
     "@types/node": "^26.1.2",
+    "p-queue": "^9.3.3",
+    "sharp": "^0.35.3",
     "tsx": "^4.23.1",
     "wrangler": "^4.115.0"
   },

@@ -21,7 +21,7 @@ Originally ran on **Deno Deploy** (Oak + Deno KV + Lume docs). After that projec
 - Framework: [Hono](concepts/hono.md)
 - Data: [D1](entities/d1-database.md) (`pokemon` + `meta`)
 - Assets / seed source: [R2 `pokeapi`](entities/r2-pokeapi.md)
-- Homepage static assets: Wrangler `public/` (logo + [API playground](concepts/api-playground.md) client)
+- Homepage: dark Pokéball UI + [API playground](concepts/api-playground.md) (`public/` favicon + client)
 - Deploy: Wrangler + [GitHub Actions](entities/github-actions.md)
 
 ## API (stable surface)
